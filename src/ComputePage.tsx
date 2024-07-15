@@ -10,9 +10,9 @@ import ComputeForm from './nillion/components/ComputeForm';
 import ConnectionInfo from './nillion/components/ConnectionInfo';
 
 export default function Main() {
-  const programName = 'addition_simple';
-  const outputName = 'my_output';
-  const partyName = 'Party1';
+  const programName = 'calorie_intake_daily';
+  const outputName = 'total_daily_calories';
+  const partyName = 'official';
   const [userkey, setUserKey] = useState<string | null>(null);
   const [client, setClient] = useState<NillionClient | null>(null);
   const [userId, setUserId] = useState<string | null>(null);

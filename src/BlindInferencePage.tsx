@@ -6,6 +6,7 @@ import { NillionClient, NadaValues } from '@nillion/client-web';
 import ComputeForm from './nillion/components/ComputeForm';
 import ConnectionInfo from './nillion/components/ConnectionInfo';
 import LRHousingFormComponent from './nillion/components/LinearRegressionForm';
+import { Box, Typography, Container } from '@mui/material';
 
 export default function BlindInferencePage() {
   // Party0 previously stored this program in the Nillion Testnet
@@ -66,9 +67,11 @@ export default function BlindInferencePage() {
   };
 
   return (
-    <div>
-      <h1>Blind Inference Demo with Housing Data</h1>
-      <p>
+    <Container>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Blind Inference Demo with Housing Data
+      </Typography>
+      <Typography variant="body1" paragraph>
         Inference is the process of using a trained model to make predictions or
         decisions based on new, unseen data. It is the phase where the model is
         applied to input data to generate an output, such as a prediction or
@@ -82,55 +85,65 @@ export default function BlindInferencePage() {
         parking, prefarea, furnishingstatus. The inference is "blind" because
         the party running the price prediction with the new input never sees the
         trained model state, which is provided to the Nada program as a secret.
-      </p>
-      <br />
+      </Typography>
       <ConnectionInfo client={client} userkey={userkey} />
 
-      <h1>1. Connect to Nillion Client {client && ' ✅'}</h1>
-      <GenerateUserKey
-        setUserKey={setUserKey}
-        defaultUserKeySeed={defaultUserKeySeed}
-      />
+      <Box my={4}>
+        <Typography variant="h5" component="h2">
+          1. Connect to Nillion Client {client && ' ✅'}
+        </Typography>
+        <GenerateUserKey
+          setUserKey={setUserKey}
+          defaultUserKeySeed={defaultUserKeySeed}
+        />
+      </Box>
 
-      {userkey && <CreateClient userKey={userkey} setClient={setClient} />}
+      {userkey && (
+        <Box my={4}>
+          <CreateClient userKey={userkey} setClient={setClient} />
+        </Box>
+      )}
 
-      <br />
-      <h1>2. Set input features</h1>
-      {client && <LRHousingFormComponent setData={handleInputFeatureDataSet} />}
-      <br />
-      <h1>
-        3. Compute on {programName} program to run blind inference{' '}
-        {computeResult && ' ✅'}
-      </h1>
-      {client &&
-        programId &&
-        storeId_model_state &&
-        partyId &&
-        additionalComputeValues && (
-          <ComputeForm
-            shouldRescale
-            nillionClient={client}
-            programId={programId}
-            additionalComputeValues={additionalComputeValues}
-            storeIds={[storeId_model_state]}
-            inputParties={[
-              // Party0
-              {
-                partyName: partyName_model_state,
-                partyId: partyId_model_state,
-              },
-              // Party1
-              {
-                partyName,
-                partyId,
-              },
-            ]}
-            outputParties={[{ partyName, partyId }]}
-            outputName={outputName}
-            onComputeProgram={handleComputeResult}
-          />
-        )}
-      <br />
-    </div>
+      <Box my={4}>
+        <Typography variant="h5" component="h2">
+          2. Set input features
+        </Typography>
+        {client && <LRHousingFormComponent setData={handleInputFeatureDataSet} />}
+      </Box>
+
+      <Box my={4}>
+        <Typography variant="h5" component="h2">
+          3. Compute on {programName} program to run blind inference {computeResult && ' ✅'}
+        </Typography>
+        {client &&
+          programId &&
+          storeId_model_state &&
+          partyId &&
+          additionalComputeValues && (
+            <ComputeForm
+              shouldRescale
+              nillionClient={client}
+              programId={programId}
+              additionalComputeValues={additionalComputeValues}
+              storeIds={[storeId_model_state]}
+              inputParties={[
+                // Party0
+                {
+                  partyName: partyName_model_state,
+                  partyId: partyId_model_state,
+                },
+                // Party1
+                {
+                  partyName,
+                  partyId,
+                },
+              ]}
+              outputParties={[{ partyName, partyId }]}
+              outputName={outputName}
+              onComputeProgram={handleComputeResult}
+            />
+          )}
+      </Box>
+    </Container>
   );
 }

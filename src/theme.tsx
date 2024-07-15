@@ -1,27 +1,46 @@
 import { createTheme } from '@mui/material/styles';
+import { grey, blueGrey, deepPurple } from '@mui/material/colors';
 
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#0021F5',
+      main: '#508D4E',
     },
     secondary: {
-      main: '#fafafa',
+      main: '#508D4E',
+    },
+    background: {
+      default: grey[50],
+      paper: grey[100],
+    },
+    text: {
+      primary: blueGrey[900],
+      secondary: blueGrey[700],
+    },
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: 15,
+  
+    button: {
+      textTransform: 'none',
     },
   },
   components: {
     MuiListItem: {
       styleOverrides: {
         root: {
-          padding: '4px 16px', // Custom padding
-          backgroundColor: '#f5f5f5', // Custom background color
+          padding: '8px 16px',
+          backgroundColor: '#B5C18E',
+          borderRadius: '14px',
+          transition: 'background-color 0.3s',
           '&:hover': {
-            backgroundColor: '#e0e0e0', // Custom hover background color
+            backgroundColor: '#76885B',
           },
           '&.Mui-selected': {
-            backgroundColor: '#d0d0d0', // Custom selected background color
+            backgroundColor: '#d0d0d0',
             '&:hover': {
-              backgroundColor: '#c0c0c0', // Custom hover color for selected item
+              backgroundColor: '#76885B',
             },
           },
         },
@@ -30,19 +49,24 @@ export const theme = createTheme({
     MuiFormControl: {
       styleOverrides: {
         root: {
-          margin: '4px 0',
+          margin: '8px 0',
+          padding: '0 8px',
+          borderRadius: '8px',
+          backgroundColor: '#76885B',
         },
       },
     },
     MuiTextField: {
       styleOverrides: {
         root: {
+          margin: '8px 0',
           '& .MuiInputBase-root': {
-            margin: '4px 0',
-            padding: '4px',
+            padding: '8px',
+            borderRadius: '8px',
+            backgroundColor: '#ffffff',
           },
           '& .MuiInputBase-input': {
-            padding: '8px',
+            padding: '12px',
           },
         },
       },
@@ -50,19 +74,39 @@ export const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          marginTop: '0px',
-          marginBottom: '0px',
-          padding: '2px',
+          marginTop: '4px',
+          marginBottom: '4px',
+          padding: '6px',
+          borderRadius: '8px',
+          backgroundColor: '#ffffff',
         },
       },
     },
     MuiSelect: {
       styleOverrides: {
         root: {
-          padding: '4px',
+          padding: '6px',
+          borderRadius: '8px',
+          backgroundColor: '#ffffff',
         },
         select: {
-          padding: '4px 8px',
+          padding: '8px 12px',
+          borderRadius: '8px',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          textTransform: 'none',
+          padding: '8px 16px',
+          boxShadow: 'none',
+          transition: 'background-color 0.3s, box-shadow 0.3s',
+          '&:hover': {
+            backgroundColor: '#365E32',
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+          },
         },
       },
     },
